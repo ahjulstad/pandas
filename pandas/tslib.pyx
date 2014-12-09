@@ -2447,7 +2447,7 @@ cpdef inline int64_t cast_from_unit(object ts, object unit) except? -1:
         p = 6
     elif unit == 'h':
         m = 1000000000L * 3600
-        p = 6
+        p = 8
     elif unit == 'm':
         m = 1000000000L * 60
         p = 6

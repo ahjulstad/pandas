@@ -561,6 +561,14 @@ class TestTimedeltas(tm.TestCase):
         # time not supported ATM
         self.assertRaises(ValueError, lambda :to_timedelta(time(second=1)))
 
+        # Tests with fractional hours as input:
+        hours = [0., 1.0/3, 0.5, 2.0/3]
+        nanoseconds = [0, 20*60*1000000000, 30*60*1000000000, 40*60*1000000000]
+        for h, n in zip(hours, nanoseconds):
+            result = to_timedelta(h, unit='h').value
+            tm.assert_equal(result, n, '{} hours should equal {} ns, got {}.'.format(h, n, result))
+
+
     def test_to_timedelta_via_apply(self):
         # GH 5458
         expected = Series([np.timedelta64(1,'s')])
